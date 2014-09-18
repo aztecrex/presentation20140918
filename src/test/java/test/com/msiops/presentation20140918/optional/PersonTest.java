@@ -1,9 +1,11 @@
-package com.msiops.presentation20140918;
+package test.com.msiops.presentation20140918.optional;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import com.msiops.presentation20140918.optional.Person;
 
 public final class PersonTest {
 

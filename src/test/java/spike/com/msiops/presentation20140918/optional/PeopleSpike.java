@@ -1,6 +1,6 @@
-package spike.com.msiops.presentation20140918;
+package spike.com.msiops.presentation20140918.optional;
 
-import com.msiops.presentation20140918.Person;
+import com.msiops.presentation20140918.optional.Person;
 
 public final class PeopleSpike {
 
