@@ -39,7 +39,13 @@ public final class Person {
 
     public Person maternalGrandfather() {
 
-        return getMother().getFather();
+        final Person rval;
+        if (getMother() != null) {
+            rval = getMother().getFather();
+        } else {
+            rval = null;
+        }
+        return rval;
 
     }
 
