@@ -18,28 +18,28 @@ public final class PersonTest {
     @Test
     public void testConstructWithFatherGetFather() {
 
-        assertEquals(this.p1, Person.withFather(this.p1).getFather());
+        assertEquals(this.p1, Person.withFather(this.p1).getFather().get());
 
     }
 
     @Test
     public void testConstructWithFatherHasNoMother() {
 
-        assertNull(Person.withFather(this.p1).getMother());
+        assertFalse(Person.withFather(this.p1).getMother().isPresent());
 
     }
 
     @Test
     public void testConstructWithMotherGetMother() {
 
-        assertEquals(this.p1, Person.withMother(this.p1).getMother());
+        assertEquals(this.p1, Person.withMother(this.p1).getMother().get());
 
     }
 
     @Test
     public void testConstructWithMotherHasNoFather() {
 
-        assertNull(Person.withMother(this.p1).getFather());
+        assertFalse(Person.withMother(this.p1).getFather().isPresent());
 
     }
 
@@ -73,14 +73,14 @@ public final class PersonTest {
     @Test
     public void testNoParentsHasNoFather() {
 
-        assertNull(Person.noParents().getFather());
+        assertFalse(Person.noParents().getFather().isPresent());
 
     }
 
     @Test
     public void testNoParentsHasNoMother() {
 
-        assertNull(Person.noParents().getMother());
+        assertFalse(Person.noParents().getMother().isPresent());
 
     }
 
@@ -101,14 +101,16 @@ public final class PersonTest {
     @Test
     public void testWithParentsGetFather() {
 
-        assertEquals(this.p2, Person.withParents(this.p1, this.p2).getFather());
+        assertEquals(this.p2, Person.withParents(this.p1, this.p2).getFather()
+                .get());
 
     }
 
     @Test
     public void testWithParentsGetMother() {
 
-        assertEquals(this.p1, Person.withParents(this.p1, this.p2).getMother());
+        assertEquals(this.p1, Person.withParents(this.p1, this.p2).getMother()
+                .get());
 
     }
 

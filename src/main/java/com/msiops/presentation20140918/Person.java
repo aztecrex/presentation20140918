@@ -24,23 +24,23 @@ public final class Person {
         return new Person(Objects.requireNonNull(m), Objects.requireNonNull(f));
     }
 
-    private final Person father;
+    private final Optional<Person> father;
 
     private final int id;
 
-    private final Person mother;
+    private final Optional<Person> mother;
 
     private Person(final Person mother, final Person father) {
         this.id = nextId.getAndIncrement();
-        this.mother = mother;
-        this.father = father;
+        this.mother = Optional.ofNullable(mother);
+        this.father = Optional.ofNullable(father);
     }
 
-    public Person getFather() {
+    public Optional<Person> getFather() {
         return this.father;
     }
 
-    public Person getMother() {
+    public Optional<Person> getMother() {
         return this.mother;
     }
 
@@ -51,9 +51,9 @@ public final class Person {
         .append(this.id)
         .append(":")
         .append("{")
-        .append(this.mother == null ? "" : this.mother.lineage())
+        .append(this.mother.map(Person::lineage).orElse(""))
         .append(",")
-        .append(this.father == null ? "" : this.father.lineage())
+        .append(this.father.map(Person::lineage).orElse(""))
         .append("}").toString();
         // @formatter:on
 
@@ -61,13 +61,7 @@ public final class Person {
 
     public Optional<Person> maternalGrandfather() {
 
-        final Person rval;
-        if (getMother() != null) {
-            rval = getMother().getFather();
-        } else {
-            rval = null;
-        }
-        return Optional.ofNullable(rval);
+        return getMother().flatMap(Person::getFather);
 
     }
 
