@@ -1,5 +1,7 @@
 package com.msiops.presentation20140918;
 
+import java.util.Objects;
+
 public final class Person {
 
     private final Person father;
@@ -24,15 +26,15 @@ public final class Person {
     }
 
     public static Person withMother(Person m) {
-        return new Person(m, null);
+        return new Person(Objects.requireNonNull(m), null);
     }
 
     public static Person withFather(Person f) {
-        return new Person(null, f);
+        return new Person(null, Objects.requireNonNull(f));
     }
 
     public static Person withParents(Person m, Person f) {
-        return new Person(m, f);
+        return new Person(Objects.requireNonNull(m), Objects.requireNonNull(f));
     }
 
 }

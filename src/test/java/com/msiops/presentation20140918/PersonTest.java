@@ -71,4 +71,32 @@ public class PersonTest {
 
     }
 
+    @Test(expected = NullPointerException.class)
+    public void testWithMotherNullFails() {
+
+        Person.withMother(null);
+
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testWithFatherNullFails() {
+
+        Person.withFather(null);
+
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testWithParentsNullMotherFails() {
+
+        Person.withParents(null, p1);
+
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testWithParentsNullFatherFails() {
+
+        Person.withParents(p1, null);
+
+    }
+
 }
