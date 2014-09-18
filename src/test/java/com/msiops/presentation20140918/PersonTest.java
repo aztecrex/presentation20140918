@@ -44,6 +44,17 @@ public class PersonTest {
     }
 
     @Test
+    public void testMaternalGrandfather() {
+
+        assertEquals(this.p1, Person.withMother(Person.withFather(this.p1))
+                .maternalGrandfather());
+        assertEquals(this.p1,
+                Person.withParents(Person.withFather(this.p1), this.p2)
+                        .maternalGrandfather());
+
+    }
+
+    @Test
     public void testNoParentsHasNoFather() {
 
         assertNull(Person.noParents().getFather());

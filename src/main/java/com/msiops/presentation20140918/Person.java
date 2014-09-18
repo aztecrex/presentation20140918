@@ -37,4 +37,10 @@ public final class Person {
         return this.mother;
     }
 
+    public Person maternalGrandfather() {
+
+        return getMother().getFather();
+
+    }
+
 }
