@@ -1,8 +1,11 @@
 package com.msiops.presentation20140918;
 
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public final class Person {
+
+    private static AtomicInteger nextId = new AtomicInteger();
 
     public static Person noParents() {
         return new Person(null, null);
@@ -22,9 +25,12 @@ public final class Person {
 
     private final Person father;
 
+    private final int id;
+
     private final Person mother;
 
     private Person(final Person mother, final Person father) {
+        this.id = nextId.getAndIncrement();
         this.mother = mother;
         this.father = father;
     }
@@ -35,6 +41,21 @@ public final class Person {
 
     public Person getMother() {
         return this.mother;
+    }
+
+    public String lineage() {
+
+        // @formatter:off
+        return new StringBuilder()
+        .append(this.id)
+        .append(":")
+        .append("{")
+        .append(this.mother == null ? "" : this.mother.lineage())
+        .append(",")
+        .append(this.father == null ? "" : this.father.lineage())
+        .append("}").toString();
+        // @formatter:on
+
     }
 
     public Person maternalGrandfather() {
@@ -49,4 +70,10 @@ public final class Person {
 
     }
 
+    @Override
+    public String toString() {
+
+        return String.valueOf(this.id);
+
+    }
 }
