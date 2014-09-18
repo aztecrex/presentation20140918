@@ -4,11 +4,27 @@ import java.util.Objects;
 
 public final class Person {
 
+    public static Person noParents() {
+        return new Person(null, null);
+    }
+
+    public static Person withFather(final Person f) {
+        return new Person(null, Objects.requireNonNull(f));
+    }
+
+    public static Person withMother(final Person m) {
+        return new Person(Objects.requireNonNull(m), null);
+    }
+
+    public static Person withParents(final Person m, final Person f) {
+        return new Person(Objects.requireNonNull(m), Objects.requireNonNull(f));
+    }
+
     private final Person father;
 
     private final Person mother;
 
-    private Person(Person mother, Person father) {
+    private Person(final Person mother, final Person father) {
         this.mother = mother;
         this.father = father;
     }
@@ -19,22 +35,6 @@ public final class Person {
 
     public Person getMother() {
         return this.mother;
-    }
-
-    public static Person noParents() {
-        return new Person(null, null);
-    }
-
-    public static Person withMother(Person m) {
-        return new Person(Objects.requireNonNull(m), null);
-    }
-
-    public static Person withFather(Person f) {
-        return new Person(null, Objects.requireNonNull(f));
-    }
-
-    public static Person withParents(Person m, Person f) {
-        return new Person(Objects.requireNonNull(m), Objects.requireNonNull(f));
     }
 
 }

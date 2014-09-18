@@ -57,17 +57,10 @@ public class PersonTest {
 
     }
 
-    @Test
-    public void testWithParentsGetMother() {
+    @Test(expected = NullPointerException.class)
+    public void testWithFatherNullFails() {
 
-        assertEquals(p1, Person.withParents(p1, p2).getMother());
-
-    }
-
-    @Test
-    public void testWithParentsGetFather() {
-
-        assertEquals(p2, Person.withParents(p1, p2).getFather());
+        Person.withFather(null);
 
     }
 
@@ -78,24 +71,31 @@ public class PersonTest {
 
     }
 
-    @Test(expected = NullPointerException.class)
-    public void testWithFatherNullFails() {
+    @Test
+    public void testWithParentsGetFather() {
 
-        Person.withFather(null);
+        assertEquals(this.p2, Person.withParents(this.p1, this.p2).getFather());
 
     }
 
-    @Test(expected = NullPointerException.class)
-    public void testWithParentsNullMotherFails() {
+    @Test
+    public void testWithParentsGetMother() {
 
-        Person.withParents(null, p1);
+        assertEquals(this.p1, Person.withParents(this.p1, this.p2).getMother());
 
     }
 
     @Test(expected = NullPointerException.class)
     public void testWithParentsNullFatherFails() {
 
-        Person.withParents(p1, null);
+        Person.withParents(this.p1, null);
+
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testWithParentsNullMotherFails() {
+
+        Person.withParents(null, this.p1);
 
     }
 
