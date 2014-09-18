@@ -1,6 +1,7 @@
 package com.msiops.presentation20140918;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public final class Person {
@@ -58,7 +59,7 @@ public final class Person {
 
     }
 
-    public Person maternalGrandfather() {
+    public Optional<Person> maternalGrandfather() {
 
         final Person rval;
         if (getMother() != null) {
@@ -66,7 +67,7 @@ public final class Person {
         } else {
             rval = null;
         }
-        return rval;
+        return Optional.ofNullable(rval);
 
     }
 

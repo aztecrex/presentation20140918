@@ -47,21 +47,26 @@ public final class PersonTest {
     public void testMaternalGrandfather() {
 
         assertEquals(this.p1, Person.withMother(Person.withFather(this.p1))
-                .maternalGrandfather());
+                .maternalGrandfather().get());
 
     }
 
     @Test
     public void testMaternalGrandfatherMotherWithoutFather() {
 
-        assertNull(Person.withMother(Person.noParents()).maternalGrandfather());
+        // one way to test
+        assertFalse("should not have grandfather",
+                Person.withMother(Person.noParents()).maternalGrandfather()
+                        .isPresent());
 
     }
 
     @Test
     public void testMaternalGrandfatherNoMother() {
 
-        assertNull(Person.noParents().maternalGrandfather());
+        // another way to test
+        Person.withMother(Person.noParents()).maternalGrandfather()
+                .ifPresent(p -> fail("shold not have grandfather"));
 
     }
 

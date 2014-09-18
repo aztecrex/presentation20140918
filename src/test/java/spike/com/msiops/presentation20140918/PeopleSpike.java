@@ -9,19 +9,13 @@ public final class PeopleSpike {
         final Person p = Person.withMother(Person.withFather(Person
                 .withFather(Person.withParents(Person.noParents(),
                         Person.noParents()))));
-        System.out.println(p.lineage());
-        System.out.println(p.maternalGrandfather().lineage());
+
+        System.out.println(p.maternalGrandfather().map(Person::lineage)
+                .orElse("p has no maternal grandfather"));
 
         final Person p2 = Person.noParents();
-
-        // System.out.println(p2.maternalGrandfather().lineage()); // <-- NPE!
-        final Person p2mg = p2.maternalGrandfather();
-        if (p2mg != null) {
-            System.out.println(p2mg.lineage());
-        } else {
-            System.out.println("p2 has no maternal grandfather");
-        }
-
+        System.out.println(p2.maternalGrandfather().map(Person::lineage)
+                .orElse("p2 has no maternal grandfather"));
     }
 
 }
